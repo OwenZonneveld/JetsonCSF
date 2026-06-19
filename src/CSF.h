@@ -108,15 +108,19 @@ public:
     // pointcloud and write the cloth particles coordinates
     void do_filtering(std::vector<int>& groundIndexes,
                       std::vector<int>& offGroundIndexes,
-                      bool exportCloth=true);
+                      bool exportCloth=false);
     
+    // Use a pre-existing cloth
+    void do_filtering_with_cloth(std::vector<int>& groundIndexes,
+                      std::vector<int>& offGroundIndexes,
+                      Cloth& cloth);
 
     std::vector<double> do_cloth_export();
 
-private:
-
     // Do the filtering and return the Cloth object
     Cloth do_cloth();
+
+private:
         
 #ifdef _CSF_DLL_EXPORT_
     class __declspec (dllexport)csf::PointCloud point_cloud;

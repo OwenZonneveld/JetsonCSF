@@ -23,6 +23,7 @@
 #include "Rasterization.h"
 #include "c2cdist.h"
 #include <fstream>
+#include <chrono>
 
 
 CSF::CSF(int index) {
@@ -65,6 +66,7 @@ void CSF::setPointCloud(std::vector<csf::Point> points) {
     }
 }
 
+/* This is the one called from the python */
 void CSF::setPointCloud(double *points, int rows, int cols) {
 	point_cloud.resize(rows);
     #define A(i, j) points[i * cols + j]
@@ -147,17 +149,23 @@ Cloth CSF::do_cloth() {
 
     cloth.addForce(Vec3(0, -gravity, 0) * time_step2);
 
+    using clock = std::chrono::high_resolution_clock;
+    auto t3 = clock::now();
+
     // boost::progress_display pd(params.interations);
     for (int i = 0; i < params.interations; i++) {
         double maxDiff = cloth.timeStep();
         cloth.terrCollision();
 		//params.class_threshold / 100
-        if ((maxDiff != 0) && (maxDiff < 0.005)) {
+        if ((maxDiff != 0) && (maxDiff < 0.01)) {
             // early stop
             break;
         }
         // pd++;
     }
+    auto t4 = clock::now();
+    std::chrono::duration<double> physics_time = t4 - t3;
+    std::cout << "do_physics: " << physics_time.count() << " s\n";
 
     if (params.bSloopSmooth) {
         cloth.movableFilter();
@@ -174,13 +182,26 @@ std::vector<double> CSF::do_cloth_export() {
 void CSF::do_filtering(std::vector<int>& groundIndexes,
                       std::vector<int>& offGroundIndexes,
                       bool exportCloth) {
+    using clock = std::chrono::high_resolution_clock;
+
+    auto t1 = clock::now();
     auto cloth = do_cloth();
-    if (exportCloth)
-        cloth.saveToFile();
+    auto t2 = clock::now();
+    
+    std::chrono::duration<double> cloth_time = t2 - t1;
+    std::cout << "do_cloth: " << cloth_time.count() << " s\n";
+
     c2cdist c2c(params.class_threshold);
     c2c.calCloud2CloudDist(cloth, point_cloud, groundIndexes, offGroundIndexes);
 }
 
+void CSF::do_filtering_with_cloth(std::vector<int>& groundIndexes,
+                      std::vector<int>& offGroundIndexes,
+                      Cloth& cloth) {
+
+    c2cdist c2c(params.class_threshold);
+    c2c.calCloud2CloudDist(cloth, point_cloud, groundIndexes, offGroundIndexes);
+}
 
 void CSF::savePoints(std::vector<int> grp, std::string path) {
     if (path == "") {

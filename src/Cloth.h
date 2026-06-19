@@ -85,6 +85,8 @@ private:
     double heightThreshold;
 
 public:
+    Cloth() = default;
+    ~Cloth() = default;
 
     Vec3 origin_pos;
     double step_x, step_y;
