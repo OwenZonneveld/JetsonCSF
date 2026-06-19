@@ -70,12 +70,14 @@ void CSF::setPointCloud(std::vector<csf::Point> points) {
 void CSF::setPointCloud(double *points, int rows, int cols) {
 	point_cloud.resize(rows);
     #define A(i, j) points[i * cols + j]
+
+    #ifdef CSF_USE_OPENMP
+    #pragma omp parallel for
+    #endif
     for (int i = 0; i < rows; i++) {
-        point_cloud[i] = {A(i, 0), -A(i, 2) , A(i, 1)};
+        point_cloud[i] = {A(i, 0), -A(i, 1), -A(i, 2)};
     }
 }
-
-
 
 void CSF::setPointCloud(double *points, int rows) {
 	#define Mat(i, j) points[i + j * rows]
@@ -149,9 +151,6 @@ Cloth CSF::do_cloth() {
 
     cloth.addForce(Vec3(0, -gravity, 0) * time_step2);
 
-    using clock = std::chrono::high_resolution_clock;
-    auto t3 = clock::now();
-
     // boost::progress_display pd(params.interations);
     for (int i = 0; i < params.interations; i++) {
         double maxDiff = cloth.timeStep();
@@ -163,9 +162,6 @@ Cloth CSF::do_cloth() {
         }
         // pd++;
     }
-    auto t4 = clock::now();
-    std::chrono::duration<double> physics_time = t4 - t3;
-    std::cout << "do_physics: " << physics_time.count() << " s\n";
 
     if (params.bSloopSmooth) {
         cloth.movableFilter();
