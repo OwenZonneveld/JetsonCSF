@@ -178,15 +178,7 @@ std::vector<double> CSF::do_cloth_export() {
 void CSF::do_filtering(std::vector<int>& groundIndexes,
                       std::vector<int>& offGroundIndexes,
                       bool exportCloth) {
-    using clock = std::chrono::high_resolution_clock;
-
-    auto t1 = clock::now();
     auto cloth = do_cloth();
-    auto t2 = clock::now();
-    
-    std::chrono::duration<double> cloth_time = t2 - t1;
-    std::cout << "do_cloth: " << cloth_time.count() << " s\n";
-
     c2cdist c2c(params.class_threshold);
     c2c.calCloud2CloudDist(cloth, point_cloud, groundIndexes, offGroundIndexes);
 }
@@ -197,6 +189,26 @@ void CSF::do_filtering_with_cloth(std::vector<int>& groundIndexes,
 
     c2cdist c2c(params.class_threshold);
     c2c.calCloud2CloudDist(cloth, point_cloud, groundIndexes, offGroundIndexes);
+}
+
+void CSF::do_filtering_with_light_cloth(std::vector<int>& groundIndexes,
+                                        std::vector<int>& offGroundIndexes,
+                                        float origin_x,
+                                        float origin_z,
+                                        float step_x,
+                                        float step_y,
+                                        std::vector<float> particle_heights,
+                                        int row_size) {
+    c2cdist c2c(params.class_threshold);
+    c2c.calCloud2CloudDist_light(origin_x,
+                                 origin_z,
+                                 step_x,
+                                 step_y,
+                                 particle_heights,
+                                 row_size,
+                                 point_cloud,
+                                 groundIndexes,
+                                 offGroundIndexes);
 }
 
 void CSF::savePoints(std::vector<int> grp, std::string path) {

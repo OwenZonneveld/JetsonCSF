@@ -15810,6 +15810,50 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Cloth_getOrigin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Cloth *arg1 = (Cloth *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< double,std::allocator< double > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Cloth_getOrigin",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Cloth, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Cloth_getOrigin" "', argument " "1"" of type '" "Cloth *""'"); 
+  }
+  arg1 = reinterpret_cast< Cloth * >(argp1);
+  result = (arg1)->getOrigin();
+  resultobj = swig::from(static_cast< std::vector< double,std::allocator< double > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Cloth_getParticleHeights(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Cloth *arg1 = (Cloth *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< double,std::allocator< double > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Cloth_getParticleHeights",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Cloth, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Cloth_getParticleHeights" "', argument " "1"" of type '" "Cloth *""'"); 
+  }
+  arg1 = reinterpret_cast< Cloth * >(argp1);
+  result = (arg1)->getParticleHeights();
+  resultobj = swig::from(static_cast< std::vector< double,std::allocator< double > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Cloth_saveMovableToFile__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Cloth *arg1 = (Cloth *) 0 ;
@@ -17013,6 +17057,107 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CSF_do_filtering_with_light_cloth(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CSF *arg1 = (CSF *) 0 ;
+  std::vector< int,std::allocator< int > > *arg2 = 0 ;
+  std::vector< int,std::allocator< int > > *arg3 = 0 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  std::vector< float,std::allocator< float > > arg8 ;
+  int arg9 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  float val4 ;
+  int ecode4 = 0 ;
+  float val5 ;
+  int ecode5 = 0 ;
+  float val6 ;
+  int ecode6 = 0 ;
+  float val7 ;
+  int ecode7 = 0 ;
+  int val9 ;
+  int ecode9 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  PyObject * obj4 = 0 ;
+  PyObject * obj5 = 0 ;
+  PyObject * obj6 = 0 ;
+  PyObject * obj7 = 0 ;
+  PyObject * obj8 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOOOOOOO:CSF_do_filtering_with_light_cloth",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6,&obj7,&obj8)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CSF, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CSF_do_filtering_with_light_cloth" "', argument " "1"" of type '" "CSF *""'"); 
+  }
+  arg1 = reinterpret_cast< CSF * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CSF_do_filtering_with_light_cloth" "', argument " "2"" of type '" "std::vector< int,std::allocator< int > > &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CSF_do_filtering_with_light_cloth" "', argument " "2"" of type '" "std::vector< int,std::allocator< int > > &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< int,std::allocator< int > > * >(argp2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CSF_do_filtering_with_light_cloth" "', argument " "3"" of type '" "std::vector< int,std::allocator< int > > &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CSF_do_filtering_with_light_cloth" "', argument " "3"" of type '" "std::vector< int,std::allocator< int > > &""'"); 
+  }
+  arg3 = reinterpret_cast< std::vector< int,std::allocator< int > > * >(argp3);
+  ecode4 = SWIG_AsVal_float(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CSF_do_filtering_with_light_cloth" "', argument " "4"" of type '" "float""'");
+  } 
+  arg4 = static_cast< float >(val4);
+  ecode5 = SWIG_AsVal_float(obj4, &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CSF_do_filtering_with_light_cloth" "', argument " "5"" of type '" "float""'");
+  } 
+  arg5 = static_cast< float >(val5);
+  ecode6 = SWIG_AsVal_float(obj5, &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "CSF_do_filtering_with_light_cloth" "', argument " "6"" of type '" "float""'");
+  } 
+  arg6 = static_cast< float >(val6);
+  ecode7 = SWIG_AsVal_float(obj6, &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "CSF_do_filtering_with_light_cloth" "', argument " "7"" of type '" "float""'");
+  } 
+  arg7 = static_cast< float >(val7);
+  {
+    std::vector< float,std::allocator< float > > *ptr = (std::vector< float,std::allocator< float > > *)0;
+    int res = swig::asptr(obj7, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "CSF_do_filtering_with_light_cloth" "', argument " "8"" of type '" "std::vector< float,std::allocator< float > >""'"); 
+    }
+    arg8 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  ecode9 = SWIG_AsVal_int(obj8, &val9);
+  if (!SWIG_IsOK(ecode9)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "CSF_do_filtering_with_light_cloth" "', argument " "9"" of type '" "int""'");
+  } 
+  arg9 = static_cast< int >(val9);
+  (arg1)->do_filtering_with_light_cloth(*arg2,*arg3,arg4,arg5,arg6,arg7,arg8,arg9);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_CSF_do_cloth_export(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CSF *arg1 = (CSF *) 0 ;
@@ -17359,6 +17504,8 @@ static PyMethodDef SwigMethods[] = {
 	 { "Cloth_handle_slop_connected", _wrap_Cloth_handle_slop_connected, METH_VARARGS, NULL},
 	 { "Cloth_saveToFile", _wrap_Cloth_saveToFile, METH_VARARGS, NULL},
 	 { "Cloth_toVector", _wrap_Cloth_toVector, METH_VARARGS, NULL},
+	 { "Cloth_getOrigin", _wrap_Cloth_getOrigin, METH_VARARGS, NULL},
+	 { "Cloth_getParticleHeights", _wrap_Cloth_getParticleHeights, METH_VARARGS, NULL},
 	 { "Cloth_saveMovableToFile", _wrap_Cloth_saveMovableToFile, METH_VARARGS, NULL},
 	 { "Cloth_swigregister", Cloth_swigregister, METH_VARARGS, NULL},
 	 { "Params_bSloopSmooth_set", _wrap_Params_bSloopSmooth_set, METH_VARARGS, NULL},
@@ -17385,6 +17532,7 @@ static PyMethodDef SwigMethods[] = {
 	 { "CSF_setPointCloud", _wrap_CSF_setPointCloud, METH_VARARGS, NULL},
 	 { "CSF_do_filtering", _wrap_CSF_do_filtering, METH_VARARGS, NULL},
 	 { "CSF_do_filtering_with_cloth", _wrap_CSF_do_filtering_with_cloth, METH_VARARGS, NULL},
+	 { "CSF_do_filtering_with_light_cloth", _wrap_CSF_do_filtering_with_light_cloth, METH_VARARGS, NULL},
 	 { "CSF_do_cloth_export", _wrap_CSF_do_cloth_export, METH_VARARGS, NULL},
 	 { "CSF_do_cloth", _wrap_CSF_do_cloth, METH_VARARGS, NULL},
 	 { "CSF_params_set", _wrap_CSF_params_set, METH_VARARGS, NULL},

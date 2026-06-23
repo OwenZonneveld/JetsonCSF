@@ -160,6 +160,11 @@ public:
 
     std::vector<double> toVector();
 
+
+    std::vector<double> getOrigin();
+    
+    std::vector<double> getParticleHeights();
+
     void saveMovableToFile(std::string path = "");
 };
 

@@ -115,6 +115,16 @@ public:
                       std::vector<int>& offGroundIndexes,
                       Cloth& cloth);
 
+    // Does the filtering with only the data required
+    void do_filtering_with_light_cloth( std::vector<int>& groundIndexes,
+                                        std::vector<int>& offGroundIndexes,
+                                        float origin_x,
+                                        float origin_z,
+                                        float step_x,
+                                        float step_y,
+                                        std::vector<float> particle_heights,
+                                        int row_size);
+
     std::vector<double> do_cloth_export();
 
     // Do the filtering and return the Cloth object

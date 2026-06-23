@@ -381,6 +381,26 @@ std::vector<double> Cloth::toVector() {
     return clothCoordinates;
 }
 
+std::vector<double> Cloth::getOrigin() {
+    std::vector<double> origin;
+
+    origin.push_back(origin_pos.f[0]);
+    origin.push_back(origin_pos.f[1]);
+    origin.push_back(origin_pos.f[2]);
+
+    return origin;
+}
+
+std::vector<double> Cloth::getParticleHeights() {
+    std::vector<double> clothCoordinates;
+    clothCoordinates.reserve(particles.size());
+    for(auto& particle : particles) {
+        clothCoordinates.push_back(particle.getPos().f[1]);
+    }
+    return clothCoordinates;
+
+}
+
 
 void Cloth::saveToFile(std::string path) {
     std::string filepath = "cloth_nodes.txt";

@@ -26,7 +26,7 @@
 class c2cdist {
 public:
 
-    c2cdist(double threshold) : class_treshold(threshold) {}
+    c2cdist(double threshold) : class_threshold(threshold) {}
 
     ~c2cdist() {}
 
@@ -37,9 +37,19 @@ public:
                             std::vector<int>& groundIndexes,
                             std::vector<int>& offGroundIndexes);
 
+    void calCloud2CloudDist_light(float origin_x,
+                                  float origin_z,
+                                  float step_x,
+                                  float step_y,
+                                  std::vector<float> particle_heights,
+                                  int row_size,
+                                  csf::PointCloud & pc,
+                                  std::vector<int>& groundIndexes,
+                                  std::vector<int>& offGroundIndexes);
+
 private:
 
-    double class_treshold; //
+    double class_threshold; //
 };
 
 

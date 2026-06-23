@@ -24,3 +24,4 @@ namespace std
 %apply (double* IN_ARRAY2, int DIM1, int DIM2) {(double *points, int rows, int cols)};
 %include "../src/Cloth.h"
 %include "../src/CSF.h"
+
