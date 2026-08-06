@@ -211,6 +211,30 @@ void CSF::do_filtering_with_light_cloth(std::vector<int>& groundIndexes,
                                  offGroundIndexes);
 }
 
+/* Particle heights is still copied, but it's so small it doesn't really matter */
+void CSF::do_filtering_with_light_cloth_zero_copy(
+                                        uint8_t* ground_mask,
+                                        int n_points,
+                                        float origin_x,
+                                        float origin_z,
+                                        float step_x,
+                                        float step_y,
+                                        std::vector<float> particle_heights,
+                                        int row_size) {
+    c2cdist c2c(params.class_threshold);
+    c2c.calCloud2CloudDist_light_zero_copy(
+                                 origin_x,
+                                 origin_z,
+                                 step_x,
+                                 step_y,
+                                 particle_heights,
+                                 row_size,
+                                 point_cloud,
+                                 ground_mask,
+                                 n_points
+                                 );
+}
+
 void CSF::savePoints(std::vector<int> grp, std::string path) {
     if (path == "") {
         return;

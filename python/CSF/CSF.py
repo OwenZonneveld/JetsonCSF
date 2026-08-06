@@ -813,6 +813,9 @@ class CSF(_object):
     def do_filtering_with_light_cloth(self, groundIndexes, offGroundIndexes, origin_x, origin_z, step_x, step_y, particle_heights, row_size):
         return _CSF.CSF_do_filtering_with_light_cloth(self, groundIndexes, offGroundIndexes, origin_x, origin_z, step_x, step_y, particle_heights, row_size)
 
+    def do_filtering_with_light_cloth_zero_copy(self, ground_mask, origin_x, origin_z, step_x, step_y, particle_heights, row_size):
+        return _CSF.CSF_do_filtering_with_light_cloth_zero_copy(self, ground_mask, origin_x, origin_z, step_x, step_y, particle_heights, row_size)
+
     def do_cloth_export(self):
         return _CSF.CSF_do_cloth_export(self)
 

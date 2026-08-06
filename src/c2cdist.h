@@ -18,9 +18,11 @@
 #ifndef _C2CDIST_H_
 #define _C2CDIST_H_
 
+#include <cstdint>
 
 #include "Cloth.h"
 #include "point_cloud.h"
+
 
 
 class c2cdist {
@@ -47,6 +49,15 @@ public:
                                   std::vector<int>& groundIndexes,
                                   std::vector<int>& offGroundIndexes);
 
+    void calCloud2CloudDist_light_zero_copy(float origin_x,
+                                            float origin_z,
+                                            float step_x,
+                                            float step_y,
+                                            std::vector<float> particle_heights,
+                                            int row_size,
+                                            csf::PointCloud& pc,
+                                            uint8_t* ground_mask,
+                                            int n);
 private:
 
     double class_threshold; //

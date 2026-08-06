@@ -18,7 +18,6 @@
 #include "c2cdist.h"
 #include <cmath>
 
-
 void c2cdist::calCloud2CloudDist(Cloth           & cloth,
                                  csf::PointCloud & pc,
                                  std::vector<int>& groundIndexes,
@@ -104,6 +103,52 @@ void c2cdist::calCloud2CloudDist_light(float origin_x,
             groundIndexes.push_back(i);
         } else {
             offGroundIndexes.push_back(i);
+        }
+    }
+}
+
+void c2cdist::calCloud2CloudDist_light_zero_copy(float origin_x,
+                                                 float origin_z,
+                                                 float step_x,
+                                                 float step_y,
+                                                 std::vector<float> particle_heights,
+                                                 int row_size,
+                                                 csf::PointCloud& pc,
+                                                 uint8_t* ground_mask,
+                                                 int n
+                                                 ) {
+
+    for (std::size_t i = 0; i < pc.size(); i++) {
+        double pc_x = pc[i].x;
+        double pc_z = pc[i].z;
+
+        double deltaX = pc_x - origin_x;
+        double deltaZ = pc_z - origin_z;
+
+        int col0 = int(deltaX / step_x);
+        int row0 = int(deltaZ / step_y);
+        int col1 = col0 + 1;
+        int row1 = row0;
+        int col2 = col0 + 1;
+        int row2 = row0 + 1;
+        int col3 = col0;
+        int row3 = row0 + 1;
+
+        double subdeltaX = (deltaX - col0 * step_x) / step_x;
+        double subdeltaZ = (deltaZ - row0 * step_y) / step_y;
+
+        double fxy
+            = particle_heights[row0 * row_size + col0] * (1 - subdeltaX) * (1 - subdeltaZ) +
+              particle_heights[row3 * row_size + col3] * (1 - subdeltaX) * subdeltaZ       +
+              particle_heights[row2 * row_size + col2] * subdeltaX * subdeltaZ             + 
+              particle_heights[row1 * row_size + col1] * subdeltaX * (1 - subdeltaZ);
+
+        double height_var = fxy - pc[i].y;
+
+        if (std::fabs(height_var) < class_threshold) {
+            ground_mask[i] = true;
+        } else {
+            ground_mask[i] = false;
         }
     }
 }

@@ -35,8 +35,11 @@
 // cloth simulation filter for airborne lidar filtering
 #ifndef _CSF_H_
 #define _CSF_H_
+
 #include <vector>
 #include <string>
+#include <cstdint>
+
 #include "point_cloud.h"
 #include "Cloth.h"
 
@@ -118,6 +121,16 @@ public:
     // Does the filtering with only the data required
     void do_filtering_with_light_cloth( std::vector<int>& groundIndexes,
                                         std::vector<int>& offGroundIndexes,
+                                        float origin_x,
+                                        float origin_z,
+                                        float step_x,
+                                        float step_y,
+                                        std::vector<float> particle_heights,
+                                        int row_size);
+
+    void do_filtering_with_light_cloth_zero_copy(
+                                        uint8_t* ground_mask,
+                                        int n_points,
                                         float origin_x,
                                         float origin_z,
                                         float step_x,
